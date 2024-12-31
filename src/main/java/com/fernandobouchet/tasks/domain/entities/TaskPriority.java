@@ -1,4 +1,4 @@
-package com.fernandobouchet.tasks.entities;
+package com.fernandobouchet.tasks.domain.entities;
 
 public enum TaskPriority {
     HIGH, MEDIUM, LOW

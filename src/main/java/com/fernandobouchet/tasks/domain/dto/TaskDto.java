@@ -1,7 +1,7 @@
-package com.fernandobouchet.tasks.dto;
+package com.fernandobouchet.tasks.domain.dto;
 
-import com.fernandobouchet.tasks.entities.TaskPriority;
-import com.fernandobouchet.tasks.entities.TaskStatus;
+import com.fernandobouchet.tasks.domain.entities.TaskPriority;
+import com.fernandobouchet.tasks.domain.entities.TaskStatus;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

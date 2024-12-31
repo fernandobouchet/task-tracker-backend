@@ -1,4 +1,4 @@
-package com.fernandobouchet.tasks.dto;
+package com.fernandobouchet.tasks.domain.dto;
 
 import java.util.List;
 import java.util.UUID;
