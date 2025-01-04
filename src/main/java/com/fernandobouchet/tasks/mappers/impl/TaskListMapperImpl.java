@@ -3,7 +3,7 @@ package com.fernandobouchet.tasks.mappers.impl;
 import com.fernandobouchet.tasks.domain.dto.TaskListDto;
 import com.fernandobouchet.tasks.domain.entities.Task;
 import com.fernandobouchet.tasks.domain.entities.TaskStatus;
-import com.fernandobouchet.tasks.domain.entities.TasksList;
+import com.fernandobouchet.tasks.domain.entities.TaskList;
 import com.fernandobouchet.tasks.mappers.TaskListMapper;
 import com.fernandobouchet.tasks.mappers.TaskMapper;
 import org.springframework.stereotype.Component;
@@ -21,8 +21,8 @@ public class TaskListMapperImpl implements TaskListMapper {
     }
 
     @Override
-    public TasksList fromDto(TaskListDto taskListDto) {
-        return new TasksList(
+    public TaskList fromDto(TaskListDto taskListDto) {
+        return new TaskList(
                 taskListDto.id(),
                 taskListDto.title(),
                 taskListDto.description(),
@@ -36,16 +36,16 @@ public class TaskListMapperImpl implements TaskListMapper {
     }
 
     @Override
-    public TaskListDto toDto(TasksList tasksList) {
+    public TaskListDto toDto(TaskList taskList) {
         return new TaskListDto(
-                tasksList.getId(),
-                tasksList.getTitle(),
-                tasksList.getDescription(),
-                Optional.ofNullable(tasksList.getTasks())
+                taskList.getId(),
+                taskList.getTitle(),
+                taskList.getDescription(),
+                Optional.ofNullable(taskList.getTasks())
                                 .map(List::size)
                         .orElse(0),
-                calculateListProgress(tasksList.getTasks()),
-                Optional.ofNullable(tasksList.getTasks())
+                calculateListProgress(taskList.getTasks()),
+                Optional.ofNullable(taskList.getTasks())
                         .map(tasks -> tasks.stream().map(taskMapper::toDto).toList())
                         .orElse(null)
 
