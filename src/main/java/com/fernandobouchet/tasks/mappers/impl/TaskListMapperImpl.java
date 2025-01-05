@@ -53,7 +53,7 @@ public class TaskListMapperImpl implements TaskListMapper {
     }
 
     private Double calculateListProgress(List<Task> tasks) {
-        if(tasks.isEmpty()){
+        if(tasks == null){
             return  null;
         }
 
