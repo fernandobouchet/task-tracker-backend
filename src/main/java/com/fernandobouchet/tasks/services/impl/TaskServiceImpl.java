@@ -7,6 +7,7 @@ import com.fernandobouchet.tasks.domain.entities.TaskStatus;
 import com.fernandobouchet.tasks.repositories.TaskListRepository;
 import com.fernandobouchet.tasks.repositories.TaskRepository;
 import com.fernandobouchet.tasks.services.TaskService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,6 +34,7 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findByTaskListId(taskListId);
     }
 
+    @Transactional
     @Override
     public Task createTask(UUID taskListId, Task task) {
         if (null != task.getId()) {
@@ -73,6 +75,7 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findByTaskListIdAndId(taskListId, taskId);
     }
 
+    @Transactional
     @Override
     public Task updateTask(UUID taskListId, UUID taskId, Task task) {
         if(null == task.getId()) {
@@ -102,6 +105,12 @@ public class TaskServiceImpl implements TaskService {
         existingTask.setUpdated(LocalDateTime.now());
 
         return taskRepository.save(existingTask);
+    }
+
+    @Transactional
+    @Override
+    public void deleteTask(UUID taskListId, UUID taskId) {
+      taskRepository.deleteTaskListIdAndId(taskListId, taskId);
     }
 
 }

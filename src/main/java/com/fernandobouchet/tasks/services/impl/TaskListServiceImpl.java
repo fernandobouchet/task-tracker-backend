@@ -3,6 +3,7 @@ package com.fernandobouchet.tasks.services.impl;
 import com.fernandobouchet.tasks.domain.entities.TaskList;
 import com.fernandobouchet.tasks.repositories.TaskListRepository;
 import com.fernandobouchet.tasks.services.TaskListService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,6 +26,7 @@ public class TaskListServiceImpl implements TaskListService {
         return taskListRepository.findAll();
     }
 
+    @Transactional
     @Override
     public TaskList createTaskList(TaskList taskList) {
         if(taskList.getId() != null) {
@@ -51,6 +53,7 @@ public class TaskListServiceImpl implements TaskListService {
         return taskListRepository.findById(id);
     }
 
+    @Transactional
     @Override
     public TaskList updateTaskList(UUID taskListId, TaskList taskList) {
       if(null == taskList.getId()) {
@@ -69,6 +72,7 @@ public class TaskListServiceImpl implements TaskListService {
       return taskListRepository.save(existingTaskList);
     }
 
+    @Transactional
     @Override
     public void deleteTaskList(UUID taskListId) {
         taskListRepository.deleteById(taskListId);
