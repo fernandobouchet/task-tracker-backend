@@ -1,14 +1,12 @@
-# Usa la imagen de Eclipse Temurin con Java 21
-FROM eclipse-temurin:21-jdk
-
-# Establece el directorio de trabajo
+# Etapa de construcción con Maven y OpenJDK 21
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copia el archivo JAR de la aplicación al contenedor
-COPY target/tu-app.jar app.jar
-
-# Expone el puerto 8080
+# Etapa de ejecución con OpenJDK 21
+FROM eclipse-temurin:21-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/colaborapp-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-
-# Comando para ejecutar la app
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "app.jar"]
