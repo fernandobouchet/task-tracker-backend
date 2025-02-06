@@ -41,7 +41,7 @@ public class TaskServiceImpl implements TaskService {
             throw new IllegalArgumentException("Task already has an ID");
         }
 
-        if (null != task.getTitle() || task.getTitle().isBlank()) {
+        if (null == task.getTitle() || task.getTitle().isBlank()) {
             throw new IllegalArgumentException("Task must hava a title");
         }
 
